@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>萌图与音乐</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: pulse 1.5s infinite;
+        }
+        button:hover {
+            background-color: #ff8787;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        #memeImage {
+            max-width: 100%;
+            max-height: 80vh;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>准备好被萌到了吗？</h1>
+        <button onclick="showImageAndPlayMusic()">点击看高清萌图</button>
+        <img id="memeImage" src="meme_image.jpg" alt="高清萌图">
+    </div>
+
+    <audio id="bgm">
+        <source src="bgm.mp3" type="audio/mpeg">
+        您的浏览器不支持音频元素。
+    </audio>
+
+    <script>
+        function showImageAndPlayMusic() {
+            var button = document.querySelector('button');
+            var image = document.getElementById('memeImage');
+            var audio = document.getElementById('bgm');
+
+            button.style.display = 'none';
+            image.style.display = 'block';
+
+            audio.play().catch(function(error) {
+                console.log('自动播放失败。这可能是由于浏览器策略导致的。');
+                alert('点击页面任意位置来播放音乐！');
+            });
+        }
+
+        // 允许用户点击页面来播放音乐（针对自动播放被阻止的情况）
+        document.body.addEventListener('click', function() {
+            var audio = document.getElementById('bgm');
+            audio.play();
+        });
+    </script>
+</body>
+</html>
